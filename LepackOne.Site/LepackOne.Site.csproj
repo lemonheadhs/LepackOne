@@ -301,6 +301,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Plugins\LeReport\importReportData.html" />
+    <Content Include="App_Plugins\LeReport\leRequestHelper.service.js" />
     <Content Include="App_Plugins\MarkDownEditor\lib\Markdown.Converter.js" />
     <Content Include="App_Plugins\MarkDownEditor\lib\Markdown.Editor.js" />
     <Content Include="App_Plugins\MarkDownEditor\lib\Markdown.Sanitizer.js" />

@@ -1,0 +1,16 @@
+﻿{
+  "propertyEditors": [
+    {
+      "alias": "Lemon.My.PersonPicker",
+      "name": "Lemon Person Picker",
+      "editor": {
+        "view": "/App_Plugins/PersonPicker/personpicker.html"
+      }
+
+    }
+  ],
+  "javascript": [
+    "/App_Plugins/PersonPicker/personpicker.controller.js",
+    "/App_Plugins/PersonPicker/person.resource.js"
+  ]
+}

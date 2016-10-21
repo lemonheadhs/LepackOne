@@ -1,0 +1,7 @@
+﻿<div ng-controller="My.PersonPickerController">
+    <ul>
+        <li ng-repeat="person in people">
+            <a href ng-click="model.value = person.Name">{{person.Name}}</a>
+        </li>
+    </ul>
+</div>

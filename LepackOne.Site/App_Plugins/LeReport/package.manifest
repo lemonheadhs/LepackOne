@@ -1,0 +1,6 @@
+﻿{
+  "javascript": [
+    "/App_Plugins/LeReport/leRequestHelper.service.js",
+    "/App_Plugins/LeReport/leReport.controller.js"
+  ]
+}

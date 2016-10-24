@@ -1,9 +1,14 @@
 ﻿
-<br />
-<h2>Lemon !</h2>
+<div ng-controller="leReportCtrl as vm">
+    <h2>Lemon !</h2>
 
-<form name="le-report-form">
-    <label>Choose a file to upload ...</label>
-    <umb-single-file-upload></umb-single-file-upload>
-</form>
+    <form name="le-report-form">
+        <label>Choose a file to upload ...</label>
+        <umb-single-file-upload rebuild="vm.rebuild"></umb-single-file-upload>
+        <button class="btn btn-primary" type="button" 
+                ng-disabled="!vm.reportFiles" 
+                ng-click="vm.importReportData()">Confirm Import</button>
+    </form>
+
+</div>
 

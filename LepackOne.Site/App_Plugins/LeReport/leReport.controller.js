@@ -1,9 +1,10 @@
 ﻿(function () {
     'use strict';
 
-    function leReportCtrl($scope, leRequestHelper) {
+    function leReportCtrl($scope, leRequestHelper, umbRequestHelper) {
         var ctrl = this;
         ctrl.reportFiles = null;
+        ctrl.rebuild = new Date();
 
         ctrl.importReportData = importReportData;
 
@@ -16,12 +17,21 @@
         });
 
         function importReportData() {
-            leRequestHelper
-                .postDataFile('', {}, ctrl.reportFiles || [])
-                .succcess(function (data, status, headers, config) {
+            var baseUrl = Umbraco.Sys.ServerVariables.lepackOneUrls.leReportApiBaseUrl;
+            var importActionUrl = baseUrl + "ImportReport";
 
+            leRequestHelper
+                .postDataFile(importActionUrl, { 'report': {} }, ctrl.reportFiles || [])
+                .success(function (data, status, headers, config) {
+                    console.log('lemon success!');
+
+                    ctrl.rebuild = new Date();
                 })
-                .error();
+                .error(function (data, status, headers, config) {
+                    console.log('failed!');
+                    console.log(arguments);
+
+                });
         }
 
     }

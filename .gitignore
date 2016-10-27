@@ -156,6 +156,8 @@ LepackOne.Site/App_Data/TEMP/SEOChecker/
 LepackOne.Site/App_Data/TEMP/DistCache/
 LepackOne.Site/App_Data/Logs/*
 LepackOne.Site/App_Data/TEMP/Razor/
+LepackOne.Site/App_Data/TEMP/FileUploads/LeReport/
+LepackOne.Site/App_Data/TEMP/FileUploads/BodyPart_*
 LepackOne.Site/App_Data/FeedCache/
 LepackOne.Site/App_Data/courier/revisions/
 LepackOne.Site/App_Data/courier/cache/*

@@ -4,11 +4,13 @@
 
     <form name="le-report-form">
         <label>Choose a file to upload ...</label>
-        <umb-single-file-upload rebuild="vm.rebuild"></umb-single-file-upload>
+        <!--<umb-single-file-upload rebuild="vm.rebuild"></umb-single-file-upload>-->
+        <div>
+            <input type="file" ngf-select ng-model="vm.reportFiles" />
+        </div>
         <button class="btn btn-primary" type="button" 
                 ng-disabled="!vm.reportFiles" 
                 ng-click="vm.importReportData()">Confirm Import</button>
     </form>
-
 </div>
 

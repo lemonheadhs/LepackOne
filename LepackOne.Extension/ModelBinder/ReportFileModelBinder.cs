@@ -1,4 +1,5 @@
 ﻿using LepackOne.Extension.Models;
+using LepackOne.Extension.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,7 @@ namespace LepackOne.Extension.ModelBinder
             var root = IOHelper.MapPath("~/App_Data/TEMP/FileUploads/LeReport");
             //ensure it exists
             Directory.CreateDirectory(root);
-            var provider = new MultipartFormDataStreamProvider(root);
+            var provider = new CustomMultipartFormDataStreamProvider(root);
 
             var task = Task.Run(() => GetModelAsync(actionContext, bindingContext, provider))
                             .ContinueWith(x => 

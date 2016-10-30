@@ -7,7 +7,7 @@ namespace LepackOne.Extension.Models
 {
     public class ReportRecord
     {
-        public decimal Price { get; set; }
+        public decimal Fice { get; set; }
         public string UniversityName { get; set; }
         public string Region { get; set; }
         public int Year { get; set; }

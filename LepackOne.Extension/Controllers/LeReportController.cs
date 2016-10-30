@@ -30,13 +30,13 @@ namespace LepackOne.Extension.Controllers
             //var dataRows = ws.Rows(2, 2 + rowCount);
             var datas = dataRows.Select(r => new ReportRecord
                         {
-                            Price = Decimal.Parse(r.Cell(1).Value as string),
-                            UniversityName = r.Cell(2).Value as string,
-                            Region = r.Cell(3).Value as string,
-                            Year = Int32.Parse(r.Cell(4).Value as string),
-                            Gender = r.Cell(5).Value as string,
-                            EthnicityGroup = r.Cell(6).Value as string,
-                            Enrollment = Int32.Parse(r.Cell(7).Value as string)
+                            Fice = Convert.ToInt32(r.Cell(1).Value),
+                            UniversityName = r.Cell(2).Value.ToString(),
+                            Region = r.Cell(3).Value.ToString(),
+                            Year = Convert.ToInt32(r.Cell(4).Value),
+                            Gender = r.Cell(5).Value.ToString(),
+                            EthnicityGroup = r.Cell(6).Value.ToString(),
+                            Enrollment = Convert.ToInt32(r.Cell(7).Value)
                         }).ToList();
                        
 

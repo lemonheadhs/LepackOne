@@ -107,6 +107,10 @@
       <HintPath>..\packages\UmbracoCms.Core.7.5.3\lib\interfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LINQtoCSV, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LINQtoCSV.1.5.0.0\lib\net35\LINQtoCSV.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.5.3\lib\log4net.dll</HintPath>
       <Private>True</Private>
@@ -340,7 +344,12 @@
     <Compile Include="Controllers\PersonApiController.cs" />
     <Compile Include="Events\LepackOneApplicationEventHandler.cs" />
     <Compile Include="Events\ServerVariableParser.cs" />
+    <Compile Include="Mapping\MappingConfiguration.cs" />
     <Compile Include="ModelBinder\ReportFileModelBinder.cs" />
+    <Compile Include="Models\Attainment.cs" />
+    <Compile Include="Models\AttainmentDTO.cs" />
+    <Compile Include="Models\AttainmentUploadReport.cs" />
+    <Compile Include="Models\Interface\IUploadFiles.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="Models\ReportDataFile.cs" />

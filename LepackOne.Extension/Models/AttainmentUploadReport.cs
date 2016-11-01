@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LepackOne.Extension.Models
 {
-    public class Report : IUploadFiles
+    public class AttainmentUploadReport : IUploadFiles
     {
         public List<ReportDataFile> Files { get; set; }
     }

@@ -1,4 +1,5 @@
 ﻿using LepackOne.Extension.Models;
+using LepackOne.Extension.Models.Interface;
 using LepackOne.Extension.Utils;
 using Newtonsoft.Json;
 using System;
@@ -20,7 +21,8 @@ using Umbraco.Web.Security;
 
 namespace LepackOne.Extension.ModelBinder
 {
-    public class ReportFileModelBinder : IModelBinder
+    public class ReportFileModelBinder<TModelSave> : IModelBinder
+        where TModelSave : IUploadFiles
     {
         protected ApplicationContext ApplicationContext { get; private set; }
 
@@ -36,7 +38,7 @@ namespace LepackOne.Extension.ModelBinder
 
         public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
         {
-            LogHelper.Info<ReportFileModelBinder>("Starting BindModel...");
+            LogHelper.Info<ReportFileModelBinder<TModelSave>>("Starting BindModel...");
 
 
             if (actionContext.Request.Content.IsMimeMultipartContent() == false)
@@ -65,9 +67,9 @@ namespace LepackOne.Extension.ModelBinder
             return bindingContext.Model != null;
         }
 
-        private async Task<Report> GetModelAsync(HttpActionContext actionContext, ModelBindingContext bindingContext, MultipartFormDataStreamProvider provider)
+        private async Task<TModelSave> GetModelAsync(HttpActionContext actionContext, ModelBindingContext bindingContext, MultipartFormDataStreamProvider provider)
         {
-            LogHelper.Info<ReportFileModelBinder>("Starting GetModelAsync...");
+            LogHelper.Info<ReportFileModelBinder<TModelSave>>("Starting GetModelAsync...");
 
             var request = actionContext.Request;
             
@@ -80,7 +82,7 @@ namespace LepackOne.Extension.ModelBinder
 
             var content = request.Content;
 
-            LogHelper.Info<ReportFileModelBinder>("Starting ReadAsMultipartAsync...");
+            LogHelper.Info<ReportFileModelBinder<TModelSave>>("Starting ReadAsMultipartAsync...");
 
             var result = await content.ReadAsMultipartAsync(provider);
 
@@ -88,14 +90,14 @@ namespace LepackOne.Extension.ModelBinder
             var reportItem = result.FormData["report"];
 
             //deserialize into our model
-            var model = JsonConvert.DeserializeObject<Report>(reportItem);
+            var model = JsonConvert.DeserializeObject<TModelSave>(reportItem);
             model.Files = new List<ReportDataFile>();
 
             //get the default body validator and validate the object
             var bodyValidator = actionContext.ControllerContext.Configuration.Services.GetBodyModelValidator();
             var metadataProvider = actionContext.ControllerContext.Configuration.Services.GetModelMetadataProvider();
             //all validation errors will not contain a prefix
-            bodyValidator.Validate(model, typeof(ReportRecordViewModel), metadataProvider, actionContext, "");
+            bodyValidator.Validate(model, typeof(TModelSave), metadataProvider, actionContext, "");
 
             foreach (var file in result.FileData)
             {

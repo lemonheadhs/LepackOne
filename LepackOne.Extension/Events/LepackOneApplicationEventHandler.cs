@@ -7,16 +7,23 @@ using Microsoft.Web.XmlTransform;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
 using System.Configuration;
+using Umbraco.Core.Persistence;
+using LepackOne.Extension.Models;
+using Umbraco.Core.Models.Mapping;
+using AutoMapper;
+using LepackOne.Extension.Mapping;
 
 namespace LepackOne.Extension.Events
 {
-    public class LepackOneApplicationEventHandler : ApplicationEventHandler
+    public class LepackOneApplicationEventHandler : ApplicationEventHandler, IMapperConfiguration
     {
+        public const string filePath = "~/config/Dashboard.config";
+        public const string xdtPth = "~/App_plugins/LeReport/Dashboard.config.install.xdt";
+
+
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
-            string filePath = "~/config/Dashboard.config";
-            string xdtPth = "~/App_plugins/LeReport/Dashboard.config.install.xdt";
-
+            // ensure dashboard.config to contain our configuration
             if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["LeReport"]))
             {
                 transform(filePath, xdtPth);
@@ -25,6 +32,22 @@ namespace LepackOne.Extension.Events
                 config.AppSettings.Settings.Add("LeReport", "on");
                 config.Save();
             }
+
+            EnsureCustomTablesRegistered(applicationContext.DatabaseContext);
+
+        }
+
+        private void EnsureCustomTablesRegistered(DatabaseContext dbContext)
+        {
+            var db = dbContext.Database;
+            var sqlSyntax = dbContext.SqlSyntax;
+            var helper = new DatabaseSchemaHelper(db, LoggerResolver.Current.Logger, sqlSyntax);
+
+            if (!helper.TableExist("LeRep_Attainment"))
+            {
+                helper.CreateTable<Attainment>();
+            }
+            
         }
 
         private void transform(string filePath, string xdtPth)
@@ -50,6 +73,11 @@ namespace LepackOne.Extension.Events
                     }
                 }
             }
+        }
+
+        public void ConfigureMappings(IConfiguration config, ApplicationContext applicationContext)
+        {
+            MappingConfiguration.Initialize(config, applicationContext);
         }
     }
 }

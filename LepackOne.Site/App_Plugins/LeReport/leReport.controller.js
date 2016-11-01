@@ -18,7 +18,7 @@
 
         function importReportData() {
             var baseUrl = Umbraco.Sys.ServerVariables.lepackOneUrls.leReportApiBaseUrl;
-            var importActionUrl = baseUrl + "ImportReport";
+            var importActionUrl = baseUrl + "ImportAttainment";//"ImportReport";
 
             //Upload.upload({
             //    url: importActionUrl,

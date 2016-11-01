@@ -2,14 +2,15 @@
 <div ng-controller="leReportCtrl as vm">
     <h2>Lemon !</h2>
 
-    <form name="le-report-form">
+    <form name="leReportForm">
         <label>Choose a file to upload ...</label>
         <!--<umb-single-file-upload rebuild="vm.rebuild"></umb-single-file-upload>-->
         <div>
-            <input type="file" ngf-select ng-model="vm.reportFiles" />
+            <input type="file" name="uploadReport" ngf-select ng-model="vm.reportFiles" ng-pattern="*.csv" />
+            <span class="text-danger" ng-show="leReportForm.$dirty && leReportForm.$error.pattern">We only support ".csv" files .</span>
         </div>
         <button class="btn btn-primary" type="button" 
-                ng-disabled="!vm.reportFiles" 
+                ng-disabled="!vm.reportFiles || leReportForm.$invalid" 
                 ng-click="vm.importReportData()">Confirm Import</button>
     </form>
 </div>

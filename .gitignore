@@ -166,6 +166,9 @@ LepackOne.Site/aspnet_client/
 LepackOne.Site/App_Data/*.udt
 LepackOne.Site/App_Data/NuGetBackup/*
 LepackOne.Extension/App_Data/NuGetBackup/*
+LepackOne.Site/node_modules/*
+LepackOne.Site/bower_components/*
+LepackOne.Site/App_Plugins/LeReport/lib
 
 # =========================
 # ImageProcessor DiskCache 

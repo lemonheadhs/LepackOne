@@ -1,0 +1,30 @@
+{
+  "name": "lepackone",
+  "version": "1.0.0",
+  "description": "a study project for umbraco",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lemonheadhs/LepackOne.git"
+  },
+  "keywords": [
+    "umbraco"
+  ],
+  "author": "lemonheadhs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lemonheadhs/LepackOne/issues"
+  },
+  "homepage": "https://github.com/lemonheadhs/LepackOne#readme",
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "gulp": "^3.9.1",
+    "gulp-bower-normalize": "^1.1.1",
+    "gulp-load-plugins": "^1.4.0",
+    "gulp-util": "^3.0.7",
+    "main-bower-files": "^2.13.1"
+  }
+}

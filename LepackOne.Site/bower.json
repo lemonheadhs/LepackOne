@@ -1,0 +1,26 @@
+{
+  "name": "lepackone",
+  "description": "a study project for umbraco",
+  "main": "index.js",
+  "authors": [
+    "lemonheadhs"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "umbraco"
+  ],
+  "homepage": "https://github.com/lemonheadhs/LepackOne",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "highcharts": "^5.0.2",
+    "ramda": "^0.22.1",
+    "bootstrap": "^3.3.7"
+  }
+}

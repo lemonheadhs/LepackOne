@@ -59,16 +59,15 @@ namespace LepackOne.Extension.Controllers
             {
                 throw new Exception("Bad Request");
             }
-
-            var fd = new CsvFileDescription
-            {
-                SeparatorChar = ',',
-                FirstLineHasColumnNames = true
-            };
-
+            
             var csvContext = new CsvContext();
             var attainmentsData = 
-                csvContext.Read<AttainmentDTO>(csvFile.TempFilePath, fd)
+                csvContext.Read<AttainmentDTO>(csvFile.TempFilePath, 
+                    new CsvFileDescription
+                    {
+                        SeparatorChar = ',',
+                        FirstLineHasColumnNames = true
+                    })
                     .ToList();
 
             var attainments = 

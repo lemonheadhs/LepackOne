@@ -319,6 +319,27 @@
     <Content Include="App_Plugins\PersonPicker\person.resource.js" />
     <Content Include="App_Plugins\PersonPicker\personpicker.controller.js" />
     <Content Include="App_Plugins\PersonPicker\personpicker.html" />
+    <Content Include="css\ie7.css" />
+    <Content Include="css\ie8.css" />
+    <Content Include="css\ie9.css" />
+    <Content Include="css\images\highlight.png" />
+    <Content Include="css\images\icons-contact.png" />
+    <Content Include="css\images\icons-meta.png" />
+    <Content Include="css\images\icons-special.png" />
+    <Content Include="css\images\overlay.png" />
+    <Content Include="css\skel-noscript.css" />
+    <Content Include="css\style-1000px.css" />
+    <Content Include="css\style-desktop.css" />
+    <Content Include="css\style-mobile.css" />
+    <Content Include="css\style.css" />
+    <Content Include="gulpfile.js" />
+    <Content Include="images\mobileUI-site-nav-opener-bg.svg" />
+    <Content Include="images\mobileUI-site-nav.svg" />
+    <Content Include="js\config.js" />
+    <Content Include="js\html5shiv.js" />
+    <Content Include="js\jquery.min.js" />
+    <Content Include="js\skel-panels.min.js" />
+    <Content Include="js\skel.min.js" />
     <Content Include="packages.config" />
     <Content Include="App_Plugins\ModelsBuilder\package.manifest" />
     <Content Include="Views\Web.config" />
@@ -366,6 +387,9 @@
     <Content Include="Views\umbTextPage.cshtml" />
     <Content Include="App_Plugins\LeReport\Dashboard.config.install.xdt" />
     <Content Include="App_Plugins\LeReport\package.manifest" />
+    <Content Include="package.json" />
+    <Content Include=".bowerrc" />
+    <Content Include="bower.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -414,6 +438,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Plugins\LeReport\lib\" />
     <Folder Include="Views\MacroPartials\" />
   </ItemGroup>
   <PropertyGroup>

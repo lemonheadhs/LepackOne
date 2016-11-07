@@ -342,6 +342,7 @@
   <ItemGroup>
     <Compile Include="Controllers\LeReportController.cs" />
     <Compile Include="Controllers\PersonApiController.cs" />
+    <Compile Include="Events\ClientDependencyRegister.cs" />
     <Compile Include="Events\LepackOneApplicationEventHandler.cs" />
     <Compile Include="Events\ServerVariableParser.cs" />
     <Compile Include="Mapping\MappingConfiguration.cs" />

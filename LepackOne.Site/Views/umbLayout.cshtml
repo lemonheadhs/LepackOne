@@ -3,7 +3,12 @@
 @{
     Layout = null;
 
+    Html.RequiresJs("~/js/jquery.min.js");
+    Html.RequiresJs("~/js/config.js");
+    Html.RequiresJs("~/js/skel.min.js");
+    Html.RequiresJs("~/js/skel-panels.js");
 
+    Html.RequiresJsBundle("LePackExtention");
 
 }<!DOCTYPE html>
 <!--
@@ -19,10 +24,10 @@
     <meta name="keywords" content="" />
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700|Open+Sans+Condensed:700" rel="stylesheet" />
     @Html.RenderJsHere()
-    <script src="/js/jquery.min.js"></script>
+    @*<script src="/js/jquery.min.js"></script>
     <script src="/js/config.js"></script>
     <script src="/js/skel.min.js"></script>
-    <script src="/js/skel-panels.min.js"></script>
+    <script src="/js/skel-panels.min.js"></script>*@
     <noscript>
         <link rel="stylesheet" href="/css/skel-noscript.css" />
         <link rel="stylesheet" href="/css/style.css" />

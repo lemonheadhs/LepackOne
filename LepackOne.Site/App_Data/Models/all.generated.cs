@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "93bc7ae907df815")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "efb8e596e3e7de6c")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
 
 
 // FILE: models.generated.cs
@@ -419,6 +419,41 @@ namespace Umbraco.Web.PublishedContentModels
 		public object TestPerson
 		{
 			get { return this.GetPropertyValue("testPerson"); }
+		}
+	}
+
+	/// <summary>Test</summary>
+	[PublishedContentModel("test")]
+	public partial class Test : UmbMaster
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "test";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public Test(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Test, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// ArchtypeLemonChart
+		///</summary>
+		[ImplementPropertyType("archtypeLemonChart")]
+		public Archetype.Models.ArchetypeModel ArchtypeLemonChart
+		{
+			get { return this.GetPropertyValue<Archetype.Models.ArchetypeModel>("archtypeLemonChart"); }
 		}
 	}
 

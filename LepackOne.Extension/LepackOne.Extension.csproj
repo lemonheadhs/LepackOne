@@ -285,6 +285,10 @@
       <HintPath>..\packages\UmbracoCms.Core.7.5.3\lib\TidyNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="uComponents.nuPickers, Version=1.5.3.159, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\nuPickers.1.5.3\lib\net45\uComponents.nuPickers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="umbraco, Version=1.0.6092.24026, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.5.3\lib\umbraco.dll</HintPath>
       <Private>True</Private>
@@ -342,6 +346,7 @@
   <ItemGroup>
     <Compile Include="Controllers\LeReportController.cs" />
     <Compile Include="Controllers\PersonApiController.cs" />
+    <Compile Include="Enums\LeReportTypeEnum.cs" />
     <Compile Include="Events\ClientDependencyRegister.cs" />
     <Compile Include="Events\LepackOneApplicationEventHandler.cs" />
     <Compile Include="Events\ServerVariableParser.cs" />

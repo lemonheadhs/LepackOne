@@ -12,7 +12,14 @@ namespace LepackOne.Extension.Events
     {
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
-            BundleManager.CreateJsBundle("");
+            string leReportJsRoot = "~/App_Plugins/LeReport/lib/";
+
+            BundleManager.CreateJsBundle("LePackExtention",
+                new JavascriptFile(leReportJsRoot + "ramda/js/ramda.js"),
+                new JavascriptFile(leReportJsRoot + "highcharts/js/highcharts.js"),
+                new JavascriptFile(leReportJsRoot + "highcharts/js/highcharts-more.js"),
+                new JavascriptFile(leReportJsRoot + "highcharts/js/exporting.js"),
+                new JavascriptFile(leReportJsRoot + "highcharts/js/drilldown.js"));
         }
     }
 }

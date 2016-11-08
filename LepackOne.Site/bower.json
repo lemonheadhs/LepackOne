@@ -22,5 +22,16 @@
     "highcharts": "^5.0.2",
     "ramda": "^0.22.1",
     "bootstrap": "^3.3.7"
+  },
+  "overrides": {
+    "highcharts": {
+      "main": [
+        "highcharts.js",
+        "highcharts-more.js",
+        "modules/exporting.js",
+        "modules/drilldown.js"
+      ]
+    }
   }
+
 }

@@ -1,0 +1,29 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Umbraco.Web
+@using Archetype.Models
+@using Archetype.Extensions
+@using nuPickers.Shared.EnumDataSource
+@using LepackOne.Extension.Enums
+@{
+	Layout = "umbLayout.cshtml";
+    
+}
+
+<div>
+    <div class="container">
+        @foreach (var fieldset in Model.Content.GetPropertyValue<ArchetypeModel>("archtypeLemonChart"))
+        {
+            var enumData = fieldset.GetValue<LeReportTypeEnum>("chartType");
+            <div class="row">
+                <div class="9u skel-cell-mainContent">
+                    @enumData.GetLabel()
+                </div>
+                <div class="3u">
+                    @Html.Raw(fieldset.GetValue("Descriptions"))
+                    
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

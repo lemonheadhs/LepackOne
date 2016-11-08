@@ -175,3 +175,4 @@ LepackOne.Site/App_Plugins/LeReport/lib
 # =========================
 LepackOne.Site/App_Data/cache/*
 LepackOne.Site/Media/***/Cached/*
+/LepackOne.Site/App_Data/TEMP/uSync

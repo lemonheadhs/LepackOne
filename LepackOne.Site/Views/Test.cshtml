@@ -1,29 +1,151 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<Umbraco.Web.PublishedContentModels.Test>
 @using Umbraco.Web
-@using Archetype.Models
-@using Archetype.Extensions
 @using nuPickers.Shared.EnumDataSource
-@using LepackOne.Extension.Enums
+@using Newtonsoft.Json
+@using ClientDependency.Core.Mvc
 @{
-	Layout = "umbLayout.cshtml";
+    Layout = "umbLayout.cshtml";
+    //Html.RequiresJs("~/App_Plugins/LeReport/lib/bootstrap/js/bootstrap.js", 101); // priority 101: bs depends on jq , and jq is at priority 100
+
+    var charts = Model.Content.ArchtypeLemonChart;
+    var firstChart = charts.FirstOrDefault();
+    int chartCount = charts.Count();
     
 }
 
-<div>
+<div id="testCharts">
     <div class="container">
-        @foreach (var fieldset in Model.Content.GetPropertyValue<ArchetypeModel>("archtypeLemonChart"))
+        @if (firstChart != null)
         {
-            var enumData = fieldset.GetValue<LeReportTypeEnum>("chartType");
             <div class="row">
                 <div class="9u skel-cell-mainContent">
-                    @enumData.GetLabel()
                 </div>
-                <div class="3u">
-                    @Html.Raw(fieldset.GetValue("Descriptions"))
-                    
+                <div class="3u chart-description">
+                    @Html.Raw(firstChart.GetValue("Descriptions"))
                 </div>
             </div>
         }
-
+        @if (chartCount > 1)
+        {
+            <div class="row">
+                <div class="12u" id="chartPager">
+                    @for (int i = 0; i < chartCount; i++)
+                    {
+                        <button value="@i" type="button">
+                            @(i + 1)
+                        </button>
+                    }
+                </div>
+            </div>
+        }
+        <br />
     </div>
+    <script>
+        $(function () {
+            var currentContentId = @Model.Content.Id;
+            getChartData(0);
+
+            $('#chartPager').on('click', 'button', function (e) {
+                var chartIndex = e.target.value;
+
+                getChartData(chartIndex);
+                refreshDescription(chartIndex);
+            });
+
+            function getChartData(chartIndex) {
+                $.get('/umbraco/LeReport/LeReportSurface/GetChartData', { currentContentId: currentContentId, chartIndex: chartIndex })
+                    .then(function (data) {
+                        var targetCategoriesCount = data.TargetCategories.length;
+                        var nonTargetCategoriesCount = data.NonTargetCategories.length;
+                        var categoriesAll = R.concat(data.NonTargetCategories, data.TargetCategories);
+
+                        var names = ['Professional Degree', 'PhD', 'Master\'s Degree', 'Bachelor\'s Degree', 'Associates Degree', 'Certificate', 'Target'];
+                        function findData(name) {
+                            return R.pipe(
+                                R.find(R.propEq('Name', name)),
+                                R.prop('Data')
+                            )(data.Groups)
+                        }
+
+                        var series = R.map(function (name) {
+                            return {
+                                name: name,
+                                data: name == 'Target'
+                                    ? R.concat(R.repeat(null, nonTargetCategoriesCount), findData(name))
+                                    : R.concat(findData(name), R.repeat(null, targetCategoriesCount))
+                            };
+                        }, names);
+                        series[0].dataLabels = {
+                            enabled: true,
+                            formatter: function () {
+                                var data = this;
+                                return '<span>' + data.total + '%</span>';
+                            }
+                        };
+                        R.last(series).dataLabels = {
+                            enabled: true,
+                            format: '<span>{point.y}%</span>'
+                        };
+
+                        $('#testCharts .skel-cell-mainContent:first').highcharts({
+                            chart: {
+                                type: 'area'
+                            },
+                            colors: ['#C87086', '#9999FF', '#00B189', '#F6B11A', '#005F84', '#8BD1E5', '#D9D9D9'],
+                            xAxis: {
+                                categories: categoriesAll,
+                                tickmarkPlacement: 'on',
+                                title: null
+                            },
+                            yAxis: {
+                                title: {
+                                    text: 'Percent'
+                                },
+                                labels: {
+                                    format: '{value}%'
+                                }
+                            },
+                            legend: {
+                                align: 'right',
+                                verticalAlign: 'top',
+                                layout: 'vertical',
+                                itemStyle: {
+                                    width: '80px',
+                                    'word-break': 'break-all',
+                                    'word-wrap': 'break-word'
+                                },
+                                itemMarginTop: 8,
+                                x: 0,
+                                y: 100
+                            },
+                            tooltip: {
+                                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y:.1f}%</b><br/>',
+                                shared: true
+                            },
+                            plotOptions: {
+                                area: {
+                                    stacking: 'normal',
+                                    lineColor: '#ffffff',
+                                    lineWidth: 1,
+                                    marker: {
+                                        enabled: false
+                                    }
+                                }
+                            },
+                            title: 'test area mix stack',
+                            series: series
+                        });
+                    });
+
+            }
+
+            function refreshDescription(chartIndex) {
+                $.get('/umbraco/LeReport/LeReportSurface/GetChartDescription', { currentContentId: currentContentId, chartIndex: chartIndex })
+                    .then(function (html) {
+                        $('.chart-description').html(html);
+                    })
+            }
+
+        });
+    </script>
 </div>
